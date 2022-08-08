@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface AuthorRepository extends CrudRepository<Author,Long> {
 
     //At run-time Spring data jpa will provide the implementation for this
-    //We only to provide the interface
+    //We only need to provide the interface
 }

@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 public class Author {
- // Id you add Entity annotation, it will tell Hibernate that this is an Entity class (for mapping)
+ // If you add Entity annotation, it will tell Hibernate that this is an Entity class (for mapping)
  //Once annotation is added,it expects  primary key so Id comes in
  //Then we set it with Generation type as Auto meaning the Id is generated form the database
  // (similar to mySQL generating primary key Ids)
