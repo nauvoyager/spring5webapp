@@ -54,7 +54,7 @@ public class BootStrapData implements CommandLineRunner {
 
         book2.setPublisher(publisher1);
         publisher1.getBooks().add(book2);
-
+         //why did this cause error? -task 1
         // Publisher publisher2 = new Publisher("CA publishers","CA street","California","LA","ca0001");
 
 
