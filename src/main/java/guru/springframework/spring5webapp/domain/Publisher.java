@@ -1,10 +1,9 @@
 package guru.springframework.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -68,8 +67,19 @@ public class Publisher {
         this.zip = zip;
     }
 
-    public Publisher(){
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
+    public Publisher() {
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     public Publisher(String name, String addressLine1, String city, String state,String zip){
@@ -86,24 +96,12 @@ public class Publisher {
 
         Publisher publisher = (Publisher) o;
 
-        if (id != null ? !id.equals(publisher.id) : publisher.id != null) return false;
-        if (name != null ? !name.equals(publisher.name) : publisher.name != null) return false;
-        if (addressLine1 != null ? !addressLine1.equals(publisher.addressLine1) : publisher.addressLine1 != null)
-            return false;
-        if (city != null ? !city.equals(publisher.city) : publisher.city != null) return false;
-        if (state != null ? !state.equals(publisher.state) : publisher.state != null) return false;
-        return zip != null ? zip.equals(publisher.zip) : publisher.zip == null;
+        return id != null ? id.equals(publisher.id) : publisher.id == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (addressLine1 != null ? addressLine1.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + (zip != null ? zip.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override

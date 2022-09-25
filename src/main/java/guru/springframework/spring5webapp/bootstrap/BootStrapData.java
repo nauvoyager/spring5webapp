@@ -24,33 +24,47 @@ public class BootStrapData implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception{
+    public void run(String... args) throws Exception {
+
+        System.out.println("Started in Bootstrap");
+
+        Publisher publisher = new Publisher();
+        publisher.setName("NY publishers");
+        publisher.setCity("Manhattan");
+        publisher.setState("NY");
+
+        publisherRepository.save(publisher);
+
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
         Author author1 = new Author("Charles", "Duhigg");
         Book book1 = new Book("Power of Habit","xxxyyy");
-        Publisher publisher1 = new Publisher("NY publishers","NY street","Manhattan","NY","ny0001");
         author1.getBooks().add(book1);
         book1.getAuthors().add(author1);
+
+        book1.setPublisher(publisher);
+        publisher.getBooks().add(book1);
+
+        authorRepository.save(author1);
+        bookRepository.save(book1);
+        publisherRepository.save(publisher);
 
 
         Author author2 = new Author("Richard", "Carlson");
         Book book2 = new Book("Dont Sweat the small stuff","aaabbb");
-        Publisher publisher2 = new Publisher("CA publishers","CA street","California","LA","ca0001");
 
         author2.getBooks().add(book2);
         book2.getAuthors().add(author2);
 
-        authorRepository.save(author1);
-        bookRepository.save(book1);
+
+        book2.setPublisher(publisher);
+        publisher.getBooks().add(book2);
+
         authorRepository.save(author2);
         bookRepository.save(book2);
-        publisherRepository.save(publisher1);
-        publisherRepository.save(publisher2);
+        publisherRepository.save(publisher);
 
-
-        System.out.println("Started in Bootstrap");
-        System.out.println("Number of Books "+bookRepository.count());
-        System.out.println("Number of Authors "+authorRepository.count());
-        System.out.println("Number of Publishers "+publisherRepository.count());
+        System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
     }
 }
